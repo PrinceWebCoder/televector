@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Televector App | {{ name }}</title>
+    <style>
+      
+     
+      body {
+        text-align: center;
+        background: #082E41;
+      }
+      pp {
+        color: #fff;
+      }
+      #site-name {
+        font-weight: 1000;
+        font-size: 40px;
+        color: rgb(255,255,100);
+        font-family: nevis;
+      }
+      .container {
+        display: inline-block;
+        text-align: left;
+        border-radius: 10px;
+        border: 0;
+        background: #fff;
+        width: 70%;
+        padding: 10px 8px 14px 20px;
+        box-shadow: 0 4px 12px 0 rgba(255,255,255,0.8);
+        transition-duration: .3s;
+        margin: 8px 0;
+        font-family: com;
+      }
+      .container:hover {
+        transform: scale(1.1);        
+        box-shadow: 0 4px 24px 0 rgba(255,255,255,0.4);
+
+      }
+      .wall {
+        max-width: 200px;
+        height: 240px;
+        margin: 4px 16px;
+        border-radius: 20px;
+        border: 0;
+      }
+      .container .title {
+        color: #000;
+        font-weight: 1000;
+        font-family: roblack;
+        font-size: 24px;
+      }
+      .container .year {
+        color: grey;
+        font-size: 14px;
+      }
+      .keyname {
+        font-weight: 1000;
+        color: #000;
+      }
+      .vname {
+        font-weight: 100;
+        color: #000;
+      }
+      .right_con {
+        float: left;
+        margin: 8px 16px;
+      }
+      .left_con {
+        float: left;
+      }
+    </style>
+    <script>
+
+    </script>
+  </head>
+  <body>
+    <br>
+    <font id="site-name">Televector</font>
+    <br><br>
+    <hr color="darkred">
+    <pp>{{ name }}</pp><br><br>
+    <center>
+    {% for m in data %}
+    <div class="container" onclick="href('get-movies');">
+      <div class="left_con">
+        <img src="{{ m.image_link }}" class="wall">
+      </div>
+      <div class="right_con">
+        <font class="title">{{ m.title }}</font><br>
+
+        <font class="keyname">ID: </font>
+        <font class="vname">{{ m.id }}</font><br>
+        <font class="keyname">YEAR: </font>
+        <font class="vname">{{ m.year }}</font><br>
+        <font class="keyname">DIRECTOR: </font>
+        <font class="vname">{{ m.director }}</font><br>
+        <font class="keyname">DURATION: </font>
+        <font class="vname">{{ m.duration }} minutes</font><br>
+        <font class="keyname">COUNTRY: </font>
+        <font class="vname">{{ m.country }}</font><br>
+        
+        
+      </div>
+    </div>
+    <br>
+    {% endfor %}
+    </center>
+    <br><br><br>
+    
+    
+    <pp>Copyright © 2021<br>Televector Inc. All Rights Reserved</pp>
+    <hr color="#fff" size="1">
+    
+  </body>
+  
+  
+  
+  
+
