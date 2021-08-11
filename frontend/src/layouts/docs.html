@@ -1,0 +1,505 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Televector App | API DOCUMENTATION</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background: #000;
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 0 20px;
+      }
+      #site-name {
+        font-weight: 1000;
+        font-size: 30px;
+        color: rgb(255,255,100);
+        font-family: nevis;
+      }
+      #main {
+        line-height: 150%;
+      }
+      
+      button {
+        min-width: 160px;
+        height: 70px;
+        padding: 10px 20px;
+        background: #fff;
+        color: #000;
+        border-radius: 4px;
+        border: 4px solid #000;
+        font-size: 18px;
+        transition-duration: .3s;
+      }
+      button:hover {
+        background: silver;
+        color: #fff;
+        border-color: #fff;
+        transform: scale(1.1);
+      }
+      a {
+        color: #43B2FF;
+        font-style: normal;
+        text-underline-offset: 4px;
+      }
+      a:hover {
+        color: #43B2FF;
+      }
+      a:active {
+        background: #fff;
+      }
+      a:visited {
+        color: #43B2FF;
+      }
+      ul {
+        margin: 20px 0 20px 40px;
+      }
+      li {
+        margin: 6px 0;
+      }
+      c {
+        background: #262626;
+        color: silver;
+        padding: 2px 6px;
+        font-family: Monospace;
+        border-radius: 4px;
+        letter-spacing: 1px;
+        font-size: 14px;
+      }
+      y {
+        font-size: 14px;
+        color: brown;
+        /* text-decoration: underline;
+        text-underline-offset: 4px; */
+      }
+      e {
+        font-style: italic;
+        color: rgb(120,120,120);
+      }
+      
+      .types, th, td {
+        border: 1px solid rgb(100,100,100);
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      .types {
+        width: 95%;
+      }
+      th {
+        text-align: left;
+        padding: 8px;
+      }
+      td {
+        padding: 0 8px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <br>
+    <font id="site-name">Televector API</font><br><br>
+    August 6, 2021
+    <br><br>
+    <hr color="darkred">
+    <div id="main">
+    <br>
+    <h2>Request</h2>
+    <br>
+    All queries to the Televector API must should be presented in this form:
+    <c><h></h>/api/%comma%</c> with one of HTTP methods.
+    <br><br>
+    
+    &nbsp;&nbsp;&nbsp;&nbsp;If a <c>id</c> parameter is present, you can also use this form:
+    <c><h></h>/api/%comma%/%id%</c>.
+    <br><br>
+    
+    The total number of all queries in the Televector API is 13.
+    <br><br>
+    
+    Send the following request to find out if the Televector API is working:
+    <c><h></h>/api</c>, the <c>working</c> field equals <i>true</i>, if API is running.
+   
+    <br><br><br>
+    
+    <a href="#"><h2>1. Commas</h2></a>
+    <ul>
+      <li><a href="#get-movies">get-movies</a></li>
+      <li><a href="#movies">movies</a></li>
+      <li><a href="#get-cartoons">get-cartoons</a></li>
+      <li><a href="#cartoons">cartoons</a></li>
+    </ul>
+    <br>
+    
+    <a href="#"><h2>2. Types</h2></a>
+    <ul>
+      <li><a href="#Movie">Movie</a></li>
+      <li><a href="#Cartoon">Cartoon</a></li>
+      <li><a href="#PartType">PartType</a></li>
+      <li><a href="#Delete">Delete</a></li>
+
+    </ul>
+    <br>
+    
+    <a href="#"><h2>3. Roles</h2></a>
+    <ul>
+      <li><a href="#Producer">Producer</a></li>
+      <li><a href="#Spectator">Spectator</a></li>
+    </ul>
+    <br>
+    
+    <a href="#"><h2 id="results">4. Result fields</h2></a>
+    <ul>
+      <li>movies</li>
+      <li>movie</li>
+      <li>cartoons</li>
+      <li>cartoon</li>
+      <li>created</li>
+      <li>changes</li>
+      <li>delete</li>
+    </ul>
+    <br>
+    
+ 
+    
+    <h2>Available methods</h2>
+    <br>
+    We support GET, POST, PATCH and DELETE HTTP methods. The response contains a JSON object, which always has a Boolean field <c>ok</c>. If <c>ok</c> equals <i>true</i>, the request was successful, and the result of the query can be found in the any <a href="#results">results</a> field. In case of an unsuccessful request, <c>ok</c> equals <i>false</i>, and the error is explained in the <c>error</c> and its message is explained in the <c>message</c> (e.g. error: 404, message: Not found ). All queries must be made using UTF-8.
+    <br><br>
+    
+    
+    <!---  MOVIES ------------>
+    <div>
+    <h1 id="movies">movies</h1>
+    <br>
+    <y>Methods: GET, POST, PATCH, DELETE</y>
+    <br><br>
+    <h3>1. Info part of movies:</h3>
+    <y>Method: GET (public)</y>
+    <br><br>
+    Use this to get information of part of movies. Returns an Array of <a href="#PartType">PartType</a> with the <c>movies</c> field on success.
+    <br><br>
+    <e>URL: <h></h>/api/movies</e>
+    <br><br>
+    
+    <h3>2. Create a new movie:</h3>
+    <y>Method: POST<br>
+    Roles: <a href="#Producer">Producer</a></y>
+    <br><br>
+    Use this to create a new movie. Returns an <a href="#Movie">Movie</a> with the <c>created</c> field on success.
+    <br><br>
+    <e>Example:<br>
+    Method: POST<br>
+    JSON: <a href="#Movie">Movie</a> (all fields required)
+    <br>
+    URL: <h></h>/api/movies</e>
+    <br><br>
+    
+    <h3>3. Edit a movie:</h3>
+    <y>Method: PATCH<br>
+    Roles: <a href="#Producer">Producer</a></y>
+    <br><br>
+    Use this to edit a movie. <c>id</c> required. Returns only you changed fields in <a href="#Movie">Movie</a> with the <c>changes</c> field on success.
+    <br><br>
+    <e>Example:<br>
+    Method: PATCH<br>
+    JSON: <a href="#Movie">Movie</a> (fields optional)
+    <br>
+    URL: <h></h>/api/movies/7</e>
+    <br><br>
+    
+    
+    <h3>4. Delete a movie:</h3>
+    <y>Method: DELETE<br>
+    Roles: <a href="#Producer">Producer</a></y>
+    <br><br>
+    Use this to delete a movie. <c>id</c> required. Returns an <a href="#Delete">Delete</a> with the <c>delete</c> field on success.
+    <br><br>
+    <e>Example:<br>
+    Method: DELETE<br>
+    <br>
+    URL: <h></h>/api/movies/7</e>
+    <br><br>
+    
+    
+    <h1 id="get-movies">get-movies</h1>
+    <br>
+    <y>Method: GET<br>
+    Roles: <a href="#Producer">Producer</a>, <a href="#Spectator">Spectator</a></y>
+    <br><br>
+    <h3>1. Get all movies:</h3>
+    <br>
+    Use this to get information of movies. Returns an Array of <a href="#Movie">Movie</a> with the <c>movies</c> field on success. 
+    <br><br>
+    <e>URL: <h></h>/api/get-movies</e>
+    <br><br>
+    
+    <h3>2. Get movie with id:</h3>
+    <br>
+    Use this to get information of one movie. Returns an <a href="#Movie">Movie</a> with the <c>movie</c> field on success. 
+    <br><br>
+    <e>Example: <h></h>/api/get-movies/7</e>
+    <br><br>
+    </div>
+    
+    <!--------   END OF MOVIES  ---->
+    
+    <!------  CARTOONS    ---->
+
+    
+    <div>
+    <h1 id="cartoons">cartoons</h1>
+    <br>
+    <y>Methods: GET, POST, PATCH, DELETE</y>
+    <br><br>
+    <h3>1. Info part of cartoons:</h3>
+    <y>Method: GET (public)</y>
+    <br><br>
+    Use this to get information of part of cartoons. Returns an Array of <a href="#PartType">PartType</a> with the <c>cartoons</c> field on success.
+    <br><br>
+    <e>URL: <h></h>/api/cartoons</e>
+    <br><br>
+    
+    <h3>2. Create a new cartoon:</h3>
+    <y>Method: POST<br>
+    Roles: <a href="#Producer">Producer</a></y>
+    <br><br>
+    Use this to create a new cartoon. Returns an <a href="#Cartoon">Cartoon</a> with the <c>created</c> field on success.
+    <br><br>
+    <e>Example:<br>
+    Method: POST<br>
+    JSON: <a href="#Cartoon">Cartoon</a> (all fields required)
+    <br>
+    URL: <h></h>/api/cartoons</e>
+    <br><br>
+    
+    <h3>3. Edit a cartoon:</h3>
+    <y>Method: PATCH<br>
+    Roles: <a href="#Producer">Producer</a></y>
+    <br><br>
+    Use this to edit a cartoon. <c>id</c> required. Returns only you changed fields in <a href="#Cartoon">Cartoon</a> with the <c>changes</c> field on success.
+    <br><br>
+    <e>Example:<br>
+    Method: PATCH<br>
+    JSON: <a href="#Cartoon">Cartoon</a> (fields optional)
+    <br>
+    URL: <h></h>/api/cartoons/7</e>
+    <br><br>
+    
+    
+    <h3>4. Delete a cartoon:</h3>
+    <y>Method: DELETE<br>
+    Roles: <a href="#Producer">Producer</a></y>
+    <br><br>
+    Use this to delete a cartoon. <c>id</c> required. Returns an <a href="#Delete">Delete</a> with the <c>delete</c> field on success.
+    <br><br>
+    <e>Example:<br>
+    Method: DELETE<br>
+    <br>
+    URL: <h></h>/api/cartoons/7</e>
+    <br><br>
+    
+    
+    <h1 id="get-cartoons">get-cartoons</h1>
+    <br>
+    <y>Method: GET<br>
+    Roles: <a href="#Producer">Producer</a>, <a href="#Spectator">Spectator</a></y>
+    <br><br>
+    <h3>1. Get all cartoons:</h3>
+    <br>
+    Use this to get information of cartoons. Returns an Array of <a href="#Cartoon">Cartoon</a> with the <c>cartoons</c> field on success. 
+    <br><br>
+    <e>URL: <h></h>/api/get-cartoons</e>
+    <br><br>
+    
+    <h3>2. Get cartoon with id:</h3>
+    <br>
+    Use this to get information of one cartoon. Returns an <a href="#Cartoon">Cartoon</a> with the <c>cartoon</c> field on success. 
+    <br><br>
+    <e>Example: <h></h>/api/get-cartoons/7</e>
+    <br><br>
+    </div>
+    
+    <!---- END OF CARTOONS ------>
+    
+    <br><br>
+    <hr color="darkred">
+
+    
+    <!---- TYPES ------>
+    
+    <br><br>
+    <h2 id="Movie">Movie</h2>
+    This object represents a movie.
+    <br>
+    <table class="types">
+      <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>id</td>
+        <td>Integer</td>
+        <td>ID of movie. Only used to delete movie, unnecessary for JSON body on request</td>
+      </tr>
+      <tr>
+        <td>title</td>
+        <td>String</td>
+        <td>Title of movie</td>
+      </tr>
+      <tr>
+        <td>year</td>
+        <td>Integer</td>
+        <td>Released year of movie</td>
+      </tr>
+      <tr>
+        <td>director</td>
+        <td>String</td>
+        <td>Director of movie</td>
+      </tr>
+      <tr>
+        <td>duration</td>
+        <td>Integer</td>
+        <td>Duration in minutes of movie</td>
+      </tr>
+      <tr>
+        <td>county</td>
+        <td>String</td>
+        <td>County that produced movie</td>
+      </tr>
+      <tr>
+        <td>image_link</td>
+        <td>String</td>
+        <td>Available image's link for movie</td>
+      </tr>
+    </table>
+    
+    <br><br>
+    <h2 id="Cartoon">Cartoon</h2>
+    This object represents a cartoon.
+    <br>
+    <table class="types">
+      <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>id</td>
+        <td>Integer</td>
+        <td>ID of cartoon. Only used to delete cartoon, unnecessary for JSON body on request</td>
+      </tr>
+      <tr>
+        <td>title</td>
+        <td>String</td>
+        <td>Title of cartoon</td>
+      </tr>
+      <tr>
+        <td>year</td>
+        <td>Integer</td>
+        <td>Released year of cartoon</td>
+      </tr>
+      <tr>
+        <td>director</td>
+        <td>String</td>
+        <td>Director of cartoon</td>
+      </tr>
+      <tr>
+        <td>duration</td>
+        <td>Integer</td>
+        <td>Duration in minutes of cartoon</td>
+      </tr>
+      <tr>
+        <td>county</td>
+        <td>String</td>
+        <td>County that produced cartoon</td>
+      </tr>
+      <tr>
+        <td>image_link</td>
+        <td>String</td>
+        <td>Available image's link for cartoon</td>
+      </tr>
+    </table>
+    
+    <br><br>
+    <h2 id="PartType">PartType</h2>
+    This object represents a part of movies or part of cartoons.
+    <br>
+    <table class="types">
+      <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>title</td>
+        <td>String</td>
+        <td>Title of movie or cartoon</td>
+      </tr>
+      <tr>
+        <td>year</td>
+        <td>Integer</td>
+        <td>Released year of movie or cartoon</td>
+      </tr>
+    </table>
+    
+    <br><br>
+    <h2 id="Delete">Delete</h2>
+    This object represents ID of deleted resource.
+    <br>
+    <table class="types">
+      <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>delete</td>
+        <td>Integer</td>
+        <td>ID of deleted movie or cartoon</td>
+      </tr>
+    </table>
+    
+    <br><br>
+    <hr color="darkred">
+    
+    <br><br>
+    <h2 id="Producer">Producer</h2>
+    <br>
+    [Admin]. This role can get full information of cartoons and movies, create new movies and cartoons, edit cartoons and movies and also delete them.
+    
+    <br><br>
+    <h2 id="Spectator">Spectator</h2>
+    <br>
+    [User]. This role only can get full information of movies and cartoons.
+    
+    
+    
+    
+    
+    
+    
+    <br><br><br><br><br><br><br><br><br>
+    
+    <center>
+    <br><br><br><br><br><br>
+    <font>Copyright © 2021<br>Televector Inc. All Rights Reserved</font>
+    <hr color="#fff" size="1">
+    </center>
+    <script>
+      
+      var hs = document.querySelectorAll('h');
+        hs.forEach(function(e) {
+          e.innerHTML = "https://" + window.location.host;
+        });
+    </script>
+  </body>
+  
+  
+  
+  
+
