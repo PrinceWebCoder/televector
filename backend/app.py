@@ -35,9 +35,6 @@ from .src.database.models import (
           # #
            #
 
-# submission 1
-# I haven't got Visa for AWS yet, that's why firstly I tried to do my Capstone project...
-
 
 app = Flask(__name__, template_folder='../frontend/src')
 
