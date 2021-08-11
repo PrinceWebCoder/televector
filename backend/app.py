@@ -8,12 +8,12 @@ from flask import (
 from sqlalchemy import exc
 import json
 from flask_cors import CORS
-from .src.auth.auth import perok
+from src.auth.auth import perok
 
 from flask_migrate import Migrate
 # > LINE 38 >
 # from src.api import create_api
-from .src.database.models import (
+from src.database.models import (
   db,
   db_drop_and_create_all,
   setup_db,
