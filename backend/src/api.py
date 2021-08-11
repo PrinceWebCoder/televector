@@ -8,7 +8,7 @@ from flask import (
 from sqlalchemy import exc
 import json
 from flask_cors import CORS
-from database.models import (
+from .database.models import (
   db_drop_and_create_all,
   db,
   setup_db,
@@ -16,7 +16,7 @@ from database.models import (
   Cartoon
   )
 from flask_migrate import Migrate
-from auth.auth import AuthError, requires_auth
+from .auth.auth import AuthError, requires_auth
 
 app = Flask(__name__)
 
