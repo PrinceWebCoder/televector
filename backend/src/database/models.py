@@ -3,12 +3,17 @@ from flask_sqlalchemy import SQLAlchemy
 import json
 import os
 import psycopg2
+# from os import getenv
 
 # DB_HOST = os.getenv('DB_HOST', '127.0.0.1:5432')  
 # DB_USER = os.getenv('DB_USER', 'postgres')  
 # DB_PASSWORD = os.getenv('DB_PASSWORD', '1234')  
 # DB_NAME = os.getenv('DB_NAME', 'televector')  
 # database_path = 'postgresql+psycopg2://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
+
+
+# DATABASE_URL = getenv("DATABASE_URI")
+# database_path = DATABASE_URL
 
 database_path = 'postgresql://apsuubnjllwwea:2f657562b880a6c452d8f92ee2c2af4e43269ebe2d4993e70b0564c8367be4cc@ec2-18-213-219-169.compute-1.amazonaws.com:5432/d57e6tsvqs3ner'
 
