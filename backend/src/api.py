@@ -429,6 +429,6 @@ def create_api(app=app, test_config=None):
   
   return app
 
-create_api()
+# create_api()
 
 # end .
