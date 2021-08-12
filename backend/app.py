@@ -45,7 +45,7 @@ def create_app(app=app):
 
   migrate = Migrate(app, db)
   # can remove this
-  db_drop_and_create_all()
+  # db_drop_and_create_all()
 
   @app.route('/')
   def index():
