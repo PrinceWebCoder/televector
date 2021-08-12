@@ -87,7 +87,7 @@ def create_app(app=app):
   
   return app
 
-create_app()
+# create_app()
 
 
 
