@@ -1,4 +1,3 @@
-export FLASK_APP=app.py
-export FLASK_DEBUG=true
-export FLASK_ENV=development
-flask run
+export AUTH0_DOMAIN='mkdir.us.auth0.com'
+export ALGORITHMS='RS256'
+export API_AUDIENCE='televector'
