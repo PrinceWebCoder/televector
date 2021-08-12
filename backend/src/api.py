@@ -20,7 +20,6 @@ from .auth.auth import AuthError, requires_auth
 
 app = Flask(__name__)
 
-
 def create_api(app=app, test_config=None):
   setup_db(app)
   CORS(app)
