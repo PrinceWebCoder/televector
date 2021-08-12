@@ -11,8 +11,6 @@ from flask_cors import CORS
 from .src.auth.auth import perok
 
 from flask_migrate import Migrate
-# > LINE 38 >
-# from src.api import create_api
 from .src.database.models import (
   db,
   db_drop_and_create_all,
@@ -36,10 +34,9 @@ from .src.database.models import (
            #
 
 
+
 app = Flask(__name__, template_folder='../frontend/src')
 
-# If you want to run both API APP and REGULAR APP at the same time:
-# create_api(app)
 
 def create_app(app=app):
 
@@ -48,7 +45,7 @@ def create_app(app=app):
 
   migrate = Migrate(app, db)
   # can remove this
-  # db_drop_and_create_all()
+  db_drop_and_create_all()
 
   @app.route('/')
   def index():
@@ -90,7 +87,7 @@ def create_app(app=app):
   
   return app
 
-# create_app()
+create_app()
 
 
 
