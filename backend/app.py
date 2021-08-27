@@ -19,22 +19,6 @@ from .src.database.models import (
   Cartoon
   )
 
-
-# M y # f i f t h # # #
- # # # # # # # # # # #
-  # p r o j e c t ! #
-   # # # # # # # # #
-    # c a p - # # #
-     # s t o n e #
-      # # # # ! #
-       # # # # #
-        # # # #
-         # # #
-          # #
-           #
-
-
-
 app = Flask(__name__, template_folder='../frontend/src')
 
 
